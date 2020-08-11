@@ -10,9 +10,9 @@ from matplotlib.lines import Line2D
 from matplotlib.patches import Polygon
 from numpy.random import default_rng
 
-from maps.plot_heatmap import HEAT_CM_1
-from maps.plot_roads import plot_roads
-from support.roadnet import RoadNetwork
+from src.maps.plot_heatmap import HEAT_CM_1
+from src.maps.plot_roads import plot_roads
+from src.support.roadnet import RoadNetwork
 
 # All of the coordinates in the building footprints data are in UTM Zone 16,
 # with a central meridian of 87W.

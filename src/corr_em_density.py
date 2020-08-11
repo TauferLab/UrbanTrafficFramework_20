@@ -3,10 +3,10 @@ from math import sqrt
 
 from sys import argv, exit, stderr
 
-from support.emissions import EmissionsSnapshot
-from support.heatmap import comp_all, utm_to_bm, Y_MIN, Y_MAX
-from support.mappings import VehicleMappings
-from support.roadnet import RoadNetwork
+from src.support.emissions import EmissionsSnapshot
+from src.support.heatmap import comp_all, utm_to_bm, Y_MIN, Y_MAX
+from src.support import VehicleMappings
+from src.support.roadnet import RoadNetwork
 
 
 def _get_nearest_cell(vehicle_loc, cells):

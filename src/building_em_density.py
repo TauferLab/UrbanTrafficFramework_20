@@ -6,9 +6,9 @@ import os.path as osp
 from itertools import product as itprod
 from math import floor
 
-from support.emissions import EmissionsSnapshot
-from support.heatmap import comp_all, utm_to_bm, BM_ROWS, BM_COLS
-from support.roadnet import RoadNetwork
+from src.support.emissions import EmissionsSnapshot
+from src.support.heatmap import comp_all, utm_to_bm, BM_ROWS, BM_COLS
+from src.support.roadnet import RoadNetwork
 from sys import argv, exit, stderr
 
 

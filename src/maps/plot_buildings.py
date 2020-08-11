@@ -1,13 +1,11 @@
 import sys
 import json
 import numpy as np
-import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
-from matplotlib.ticker import MultipleLocator
 
-from support.utm import convert_to_utm
+from src.support.utm import convert_to_utm
 
 # All of the coordinates in the building footprints data are in UTM Zone 16,
 # with a central meridian of 87W.

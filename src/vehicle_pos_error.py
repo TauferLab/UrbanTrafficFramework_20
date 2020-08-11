@@ -9,10 +9,9 @@ import os.path as osp
 import sys
 import csv
 import numpy as np
-from numpy.random import default_rng
 import multiprocessing as mp
 
-from support import roadnet
+from src.support import roadnet
 
 SAMPLED_RECORDS = 1242228
 

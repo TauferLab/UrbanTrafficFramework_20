@@ -1,11 +1,8 @@
-import os.path as osp
 import sys
-import numpy as np
-import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 
-from support.roadnet import RoadNetwork
+from src.support.roadnet import RoadNetwork
 
 COLORS = {
     "A00": "r",

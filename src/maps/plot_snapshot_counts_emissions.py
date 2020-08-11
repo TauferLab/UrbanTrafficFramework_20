@@ -1,15 +1,9 @@
 import sys
-from typing import Tuple
-import numpy as np
-from collections import Counter
-import matplotlib
 from matplotlib import pyplot as plt
-from matplotlib.colors import Normalize
-from matplotlib.lines import Line2D
 
-from support.roadnet import RoadNetwork, Link
-from support import linkvolio
-from support.emissions import EmissionsSnapshot
+from src.support.roadnet import RoadNetwork
+from src.support.simsio import Snapshot
+from src.support.emissions import EmissionsSnapshot
 
 
 def main():
@@ -17,7 +11,7 @@ def main():
         sys.stderr.write(
             "USAGE: "
             + sys.argv[0]
-            + " [path to road network GeoJSON file] [path to link volume data] [path to emissions snapshot]\n"
+            + " [path to road network GeoJSON file] [path to snapshot data] [path to emissions snapshot]\n"
         )
         sys.exit(1)
 
@@ -30,7 +24,17 @@ def main():
 
     # Load traces and count # of frames per link:
     with open(sys.argv[2], "r", encoding="utf-8") as f:
-        volumes = linkvolio.link_volumes(f)
+        snapshot = Snapshot.load(f, ordered=False)
+    link_counts = {}
+
+    for road in network.links:
+        link_counts[road.id] = set()
+
+    for frame in snapshot.iter_time():
+        link_counts[frame.link].add(frame.vid)
+
+    for road in network.links:
+        link_counts[road.id] = len(link_counts[road.id])
 
     # Load emissions snapshot data:
     with open(sys.argv[3], "r", encoding="utf-8") as f:
@@ -40,13 +44,13 @@ def main():
     ys = []
 
     for road in network.links:
-        if road.id in volumes and road.id in snapshot.data:
-            xs.append(volumes[road.id].link_vol)
+        if road.id in link_counts and road.id in snapshot.data:
+            xs.append(link_counts[road.id])
             ys.append(snapshot.data[road.id].quantity)
 
     ax.plot(xs, ys, '.')
-    ax.set_title("Recorded Link Volume vs. Emissions Quantity")
-    ax.set_xlabel("Link Volume (vehicles / hour)")
+    ax.set_title("Recorded Snapshot Vehicle Counts vs. Emissions Quantities")
+    ax.set_xlabel("Derived Link Volume (vehicles)")
     ax.set_ylabel("Emissions Quantity (MMBtu)")
 
     plt.show()

@@ -1,14 +1,12 @@
 import sys
-from typing import Tuple
 import numpy as np
 from collections import Counter
-import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.lines import Line2D
 
-from support.roadnet import RoadNetwork, Link
-from support.simsio import Snapshot
+from src.support.roadnet import RoadNetwork, Link
+from src.support.simsio import Snapshot
 
 
 def plot_road(road: Link, color: np.ndarray) -> Line2D:

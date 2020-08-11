@@ -4,17 +4,14 @@ from itertools import product as itprod
 from math import floor
 from sys import argv, exit, stderr
 
-import matplotlib
 from matplotlib import pyplot as plt, cm
 from matplotlib.colors import ListedColormap, Normalize
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
-from matplotlib.text import Text
 
-from support.heatmap import comp_all, X_MIN, X_MAX, Y_MIN, Y_MAX
-from support.emissions import EmissionsSnapshot
-from support.roadnet import RoadNetwork
+from src.support.heatmap import comp_all, X_MIN, X_MAX, Y_MIN, Y_MAX
+from src.support.emissions import EmissionsSnapshot
+from src.support.roadnet import RoadNetwork
 
 ROAD_COLOR = "#000000ff"
 N_COLORS = 256

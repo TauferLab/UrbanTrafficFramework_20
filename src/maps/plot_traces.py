@@ -1,16 +1,12 @@
-import os.path as osp
 import sys
-import json
-from typing import List
 import numpy as np
 from numpy.random import default_rng
-import matplotlib
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 
-from maps.plot_roads import plot_roads
-from support.roadnet import RoadNetwork
-from support.simsio import Snapshot, Trace
+from src.maps.plot_roads import plot_roads
+from src.support.roadnet import RoadNetwork
+from src.support.simsio import Snapshot, Trace
 
 
 SAMPLE_PROPORTION = 0.01

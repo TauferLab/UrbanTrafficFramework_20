@@ -3,7 +3,7 @@ import csv
 import numpy as np
 from scipy.spatial import cKDTree   # pylint: disable=no-name-in-module
 
-from support.simsio import Snapshot
+from src.support.simsio import Snapshot
 
 MAX_SNAP_DISTANCE = 20.0
 

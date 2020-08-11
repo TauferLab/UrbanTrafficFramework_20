@@ -2,7 +2,7 @@ import csv
 import sys
 import ijson
 import numpy as np
-from support.utm import convert_to_utm
+from src.support.utm import convert_to_utm
 
 CENT_LON = -87
 

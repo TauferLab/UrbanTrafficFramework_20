@@ -4,16 +4,15 @@ from matplotlib.axes import Axes
 
 from matplotlib.colors import Normalize, ListedColormap
 from matplotlib import pyplot as plt, cm
-from matplotlib.lines import Line2D
 # noinspection PyProtectedMember
 from numpy.random._generator import default_rng
 
-from maps.plot_heatmap import html_to_rgba, get_color, N_COLORS
-from maps.plot_roads import plot_roads
-from maps.plot_vehicle_mappings import load_buildings, fences
-from support.emissions import EmissionsSnapshot
-from support.heatmap import X_MIN, X_MAX, Y_MIN, Y_MAX, comp_all
-from support.roadnet import RoadNetwork
+from src.maps.plot_heatmap import html_to_rgba, get_color, N_COLORS
+from src.maps.plot_roads import plot_roads
+from src.maps.plot_vehicle_mappings import load_buildings, fences
+from src.support.emissions import EmissionsSnapshot
+from src.support.heatmap import X_MIN, X_MAX, Y_MIN, Y_MAX, comp_all
+from src.support.roadnet import RoadNetwork
 from sys import argv, exit, stderr
 
 LOG_SCALING = False

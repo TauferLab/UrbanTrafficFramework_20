@@ -1,10 +1,9 @@
 from csv import writer as CSVWriter
-from itertools import product as itprod
 from os import path as osp
 
-from support import heatmap
-from support.emissions import EmissionsSnapshot
-from support.roadnet import RoadNetwork
+from src.support import heatmap
+from src.support.emissions import EmissionsSnapshot
+from src.support.roadnet import RoadNetwork
 from sys import argv, exit, stderr
 
 def main():

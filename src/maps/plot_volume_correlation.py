@@ -1,15 +1,9 @@
 import sys
-from typing import Tuple
-import numpy as np
-from collections import Counter
-import matplotlib
 from matplotlib import pyplot as plt
-from matplotlib.colors import Normalize
-from matplotlib.lines import Line2D
 
-from support.roadnet import RoadNetwork, Link
-from support.simsio import Snapshot
-from support.emissions import EmissionsSnapshot
+from src.support.roadnet import RoadNetwork
+from src.support.simsio import Snapshot
+from src.support import linkvolio
 
 
 def main():
@@ -17,7 +11,7 @@ def main():
         sys.stderr.write(
             "USAGE: "
             + sys.argv[0]
-            + " [path to road network GeoJSON file] [path to snapshot data] [path to emissions snapshot]\n"
+            + " [path to road network GeoJSON file] [path to snapshot data] [path to link volume data]\n"
         )
         sys.exit(1)
 
@@ -42,22 +36,22 @@ def main():
     for road in network.links:
         link_counts[road.id] = len(link_counts[road.id])
 
-    # Load emissions snapshot data:
+    # Load link volume snapshot data:
     with open(sys.argv[3], "r", encoding="utf-8") as f:
-        snapshot = EmissionsSnapshot.load(f)
+        vols = linkvolio.link_volumes(f)
 
     xs = []
     ys = []
 
     for road in network.links:
-        if road.id in link_counts and road.id in snapshot.data:
-            xs.append(link_counts[road.id])
-            ys.append(snapshot.data[road.id].quantity)
+        if road.id in link_counts and road.id in vols:
+            ys.append(link_counts[road.id])
+            xs.append(vols[road.id].link_vol)
 
     ax.plot(xs, ys, '.')
-    ax.set_title("Recorded Snapshot Vehicle Counts vs. Emissions Quantities")
-    ax.set_xlabel("Derived Link Volume (vehicles)")
-    ax.set_ylabel("Emissions Quantity (MMBtu)")
+    ax.set_ylabel("Vehicles on Link (Snapshot Data)")
+    ax.set_xlabel("Vehicles on Link (Link Volume Data)")
+    ax.set_title("Link Volume Correlation")
 
     plt.show()
 

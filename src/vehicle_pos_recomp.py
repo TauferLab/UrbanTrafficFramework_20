@@ -1,11 +1,11 @@
 import csv
 import os.path as osp
 
-from support.heatmap import X_MAX, X_MIN, BM_COLS, BM_ROWS, Y_MIN, Y_MAX
-from support.roadnet import RoadNetwork
+from src.support.heatmap import X_MAX, X_MIN, BM_COLS, BM_ROWS, Y_MIN, Y_MAX
+from src.support.roadnet import RoadNetwork
 from sys import argv, exit, stderr
 
-from support.simsio import Snapshot
+from src.support.simsio import Snapshot
 
 
 DX_THRESHOLD = 30 * (X_MAX - X_MIN) / BM_COLS

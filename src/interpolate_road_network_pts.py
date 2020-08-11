@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import sys
 
-from support import roadnet
+from src.support import roadnet
 
 SPACING = 2.5
 
