@@ -2,10 +2,22 @@ import csv
 
 
 LINK_DESC = []
+DAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
 
 
 class LinkVolume:
-    def __init__(self, link_id, cty_id, zone_id, road_t, length, volume, avg_speed, desc, avg_grade):
+    def __init__(
+        self,
+        link_id: int,
+        cty_id: int,
+        zone_id: int,
+        road_t: int,
+        length: float,
+        volume: float,
+        avg_speed: float,
+        desc: int,
+        avg_grade: float,
+    ):
         self.link_id = link_id
         self.county_id = cty_id
         self.zone_id = zone_id
@@ -19,9 +31,9 @@ class LinkVolume:
 
 def link_volumes(fp):
     result = {}
-
-    reader = csv.reader(fp, delimiter=',')
+    reader = csv.reader(fp, delimiter=",")
     next(reader)
+
     for row in reader:
         lid = int(row[0])
         cid = int(row[1])
@@ -30,33 +42,37 @@ def link_volumes(fp):
         link_len = float(row[4])
         link_vol = int(row[5])
         avg_sp = float(row[6])
-        desc = row[7]
         avg_gr = float(row[8])
 
-        if desc in LINK_DESC:
-            desc = LINK_DESC.index(desc)
-        else:
+        try:
+            # Attempt to find the link description in LINK_DESC
+            desc = LINK_DESC.index(row[7])
+        except ValueError:
+            # Not found-- append the description to LINK_DESC
             desc = len(LINK_DESC)
-            LINK_DESC.append(desc)
-        result[lid] = LinkVolume(lid, cid, zid, rt, link_len, link_vol, avg_sp, desc, avg_gr)
+            LINK_DESC.append(row[7])
+
+        result[lid] = LinkVolume(
+            lid, cid, zid, rt, link_len, link_vol, avg_sp, desc, avg_gr
+        )
+
     return result
-
-
-DAYS = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"]
 
 
 class VolumeSnapshot:
     def __init__(self):
-        self.volumes = {key: [[]]*24 for key in DAYS}
+        self.volumes = {key: [[]] * 24 for key in DAYS}
         self.links = []
 
     def insert_volume(self, day, hour, lv):
         lv_array = self.volumes[day][hour]
 
         if len(lv_array) <= lv.link_id:
-            lv_array.extend([None]*(lv.link_id - len(lv_array) + 1))
+            lv_array.extend([None] * (lv.link_id - len(lv_array) + 1))
         lv_array[lv.link_id] = lv
 
         if len(self.links) <= lv.link_id:
-            self.links.extend([{key: [[]]*24 for key in DAYS}]*(lv.link_id - len(lv_array) + 1))
+            self.links.extend(
+                [{key: [[]] * 24 for key in DAYS}] * (lv.link_id - len(lv_array) + 1)
+            )
         self.links[lv.link_id][day][hour] = lv

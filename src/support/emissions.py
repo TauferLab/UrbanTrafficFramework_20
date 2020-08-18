@@ -50,6 +50,7 @@ class EmissionsSnapshot(object):
         reader = csv.reader(fp)
         next(reader)
 
+        # CSV column order: hour, linkID, pollutantID, emrate, emquant
         for row in reader:
             link_data = LinkEmissions(int(row[1]), float(row[3]), float(row[4]))
             ret.data[link_data.link] = link_data

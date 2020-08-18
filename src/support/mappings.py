@@ -1,12 +1,22 @@
 from __future__ import annotations
 import csv
 import os.path as osp
-from typing import TextIO, Dict
+from typing import TextIO, Dict, List
 
 
 class MappingEntry:
-    def __init__(self, bid: int, vid: int, lid: int, vx: float, vy: float,
-                 bx: float, by: float, dist: float, vcount: int):
+    def __init__(
+        self,
+        bid: int,
+        vid: int,
+        lid: int,
+        vx: float,
+        vy: float,
+        bx: float,
+        by: float,
+        dist: float,
+        vcount: int,
+    ):
         self.vehicle_id = vid
         self.link_id = lid
         self.vehicle_loc = (vx, vy)
@@ -16,9 +26,18 @@ class MappingEntry:
         self.vehicles = vcount
 
     @classmethod
-    def parse_csv(cls, row) -> MappingEntry:
-        return cls(int(row[4]), int(row[0]), int(row[1]), float(row[2]), float(row[3]),
-                   float(row[5]), float(row[6]), float(row[7]), int(row[8]))
+    def parse_csv(cls, row: List[str]) -> MappingEntry:
+        return cls(
+            int(row[4]),
+            int(row[0]),
+            int(row[1]),
+            float(row[2]),
+            float(row[3]),
+            float(row[5]),
+            float(row[6]),
+            float(row[7]),
+            int(row[8]),
+        )
 
 
 class VehicleMappings:
