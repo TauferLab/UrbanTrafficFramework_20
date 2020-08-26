@@ -21,8 +21,8 @@ SEED = 5123125123
 Z_ORDER_ROAD, Z_ORDER_BUILDING, Z_ORDER_MARKER, Z_ORDER_HEAT = range(0, 4)
 
 COLOR_BASE_1 = [html_to_rgba(color) for color in [
-    '#404040ff',
-    '#f0f0f0ff'
+    '#ffffffff',
+    '#080808ff'
 ]]
 COLOR_BASE_2 = [html_to_rgba(color) for color in [
     '#f20d0d00',
